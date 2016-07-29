@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherWithGeneric" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bKx-ay-Twh">
+                                <rect key="frame" x="0.0" y="195" width="375" height="472"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5VK-4e-B5N">
+                                <rect key="frame" x="20" y="84" width="335" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bKx-ay-Twh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Giv-1E-mCQ"/>
+                            <constraint firstItem="bKx-ay-Twh" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="R45-Dk-jlq"/>
+                            <constraint firstAttribute="trailing" secondItem="bKx-ay-Twh" secondAttribute="trailing" id="SEF-uy-SaR"/>
+                            <constraint firstItem="5VK-4e-B5N" firstAttribute="centerX" secondItem="bKx-ay-Twh" secondAttribute="centerX" id="VO0-Mp-3pr"/>
+                            <constraint firstItem="bKx-ay-Twh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="175" id="ViT-AH-93D"/>
+                            <constraint firstItem="bKx-ay-Twh" firstAttribute="top" secondItem="5VK-4e-B5N" secondAttribute="bottom" constant="73" id="Wnu-ia-fjQ"/>
+                            <constraint firstItem="5VK-4e-B5N" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="64" id="feR-6u-LJ2"/>
+                            <constraint firstItem="5VK-4e-B5N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="u8T-1Z-82F"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="bKx-ay-Twh" id="Oxo-d1-6ii"/>
+                        <outlet property="myLabel" destination="5VK-4e-B5N" id="XgX-u4-B35"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="434.5" y="315.5"/>
+        </scene>
+    </scenes>
+</document>
