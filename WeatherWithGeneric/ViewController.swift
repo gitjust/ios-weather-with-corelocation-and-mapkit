@@ -25,19 +25,19 @@ class ViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDeleg
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestAlwaysAuthorization() //only active when app in use
         self.locationManager.startUpdatingLocation()
-        self.mapView.hidden = true
+        self.mapView.isHidden = true
         self.mapView.showsUserLocation = false
         lat = self.mapView.userLocation.coordinate.latitude
         long = self.mapView.userLocation.coordinate.longitude
     }
 
-    func alertMe(temp: Double) {
-        let alertKu = UIAlertController(title: "Location Found", message: "temp: \(temp)°C", preferredStyle: UIAlertControllerStyle.Alert)
-        alertKu.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-        presentViewController(alertKu, animated: true, completion: nil)
+    func alertMe(_ temp: Double) {
+        let alertKu = UIAlertController(title: "Location Found", message: "temp: \(temp)°C", preferredStyle: UIAlertControllerStyle.alert)
+        alertKu.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        present(alertKu, animated: true, completion: nil)
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         //print("center: \(center)")
@@ -46,19 +46,19 @@ class ViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDeleg
         //long = 112.7425
         lat = center.latitude
         long = center.longitude
-        let session = NSURLSession.sharedSession()
-        let url = NSURL(string: "https://api.forecast.io/forecast/09c863b692bb3e7e1bcadcb05dc0d4ca/\(lat!),\(long!)?units=si")!
-        let dataTask = session.dataTaskWithURL(url) { (data, response, error) -> Void in
+        let session = URLSession.shared
+        let url = URL(string: "https://api.darksky.net/forecast/09c863b692bb3e7e1bcadcb05dc0d4ca/\(lat!),\(long!)?units=si")!
+        let dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
             do {
-                let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as! NSDictionary
+                let jsonData = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
                 //print(jsonData)
-                let results = jsonData.objectForKey("currently") as! NSDictionary
+                let results = jsonData.object(forKey: "currently") as! NSDictionary
 
                 for (key, value) in results {
                     //print(key, value)
-                    switch key as! NSObject {
+                    switch key as! NSString {
                     case "temperature":
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     print("\(self.count)temperature: \(value)")
                     self.count! += 1
                     //self.alertMe(value as! Double)
@@ -74,7 +74,7 @@ class ViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDeleg
             } catch {
                 print("error: \(error)")
             }
-        }
+        }) 
         dataTask.resume()
         
         //zoom level: 1
@@ -84,7 +84,7 @@ class ViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDeleg
 */
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error: " + error.localizedDescription)
     }
 
